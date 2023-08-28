@@ -1,7 +1,7 @@
 #pragma once  // #pragma once directive added to avoid multiple inclusions of header files
 
 #include "observer.h"  // Include Observer header file
-#include "model_simulator_breakout.h"  // Include PongModel header file
+#include "model_simulator_breakout.h"  // Include BreakOutgModel header file
 #include <ncurses.h>
 
 class ConsoleView : public Observer  // Inheriting from Observer class
@@ -12,6 +12,12 @@ public:
     ConsoleView(BreakoutModel* model);  // Constructor of ConsoleView class
 
     virtual ~ConsoleView();  // Virtual destructor of ConsoleView class
+
+    void drawPaddle(int y, int x);  // Function to draw the paddle
+
+    void drawBall(double x, double y);  // Function to draw the ball
+
+    void drawBlock(double x, double y); // Function to draw the block
 
     void update();  // Function to update the screen
 

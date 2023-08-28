@@ -13,6 +13,20 @@ ConsoleView::~ConsoleView() {
     endwin();
 };
 
+void ConsoleView::drawPaddle(int y, int x) {
+    mvaddch(y + 1, x, '_');
+    mvaddch(y, x, '_');
+    mvaddch(y - 1, x, '_');
+};
+
+void ConsoleView::drawBall(double x, double y) {
+    mvaddch(x, y, 'o');
+};
+
+void ConsoleView::update() {
+    mvaddch(x, y, '#');
+}
+
 void ConsoleView::update() {
     // libncurses standard loop calls
     erase();
@@ -31,6 +45,10 @@ void ConsoleView::update() {
     mvprintw(1, model->getGameWidth() / 2 / 2, "%i", 0);
 
     // Draw different objects. 
+    drawBall(model->getBall().getY(), model->getBall().getX());
+    drawBlock(model->getBlock().getY(), model->getBlock().getX());
+    drawPaddle(model->getPaddle().getY(), model->getPaddle().getX());
+
 };
 
 void ConsoleView::setup_view() {
