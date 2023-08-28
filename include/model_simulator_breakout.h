@@ -3,7 +3,48 @@
 
 #include "observer.h" // include header file for the Observable class
 
-class BreakoutModel : public Observable { // PongModel class inherits from Observable class
+class BrakeOutObject {
+protected:
+    double x, y; // BrakeOutObject's coordinates and height
+
+public:
+    BreakOutObject(double y, double x); // constructor that takes in initial x and y coordinates of player
+    double getX();
+    double getY();
+    void setX(double a);
+    void setY(double a);
+};
+
+class Paddle : public BrakeOutObject {
+private:
+    int width; // paddle's width
+
+public:
+    Paddle(double y, double x, int width); // constructor that takes in initial x and y coordinates of paddle
+    int getwidth();
+};
+
+class Ball : public BrakeOutObject {
+private:
+    int speed; // ball's speed
+    
+public:
+    Ball(double y, double x, int speed); // constructor that takes in initial x and y coordinates of ball and its speed
+    int getSpeed();
+    void setSpeed(int a);
+};
+
+class Block : public BrakeoutObject {
+private: 
+    int health; // block's health
+
+public:
+    Block(double y, double x, int health);
+    int getHealth();
+    void setHealth(int a);
+}
+
+class BreakoutModel : public Observable { // BrakeOutModel class inherits from Observable class
 public:
     BreakoutModel(); // constructor
 
