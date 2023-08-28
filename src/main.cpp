@@ -6,6 +6,7 @@
 #include "view_console.h"
 #include "controller_console.h"
 
+// Main Funktion
 int main() {
     BreakoutModel* breakout = new BreakoutModel();
     ConsoleView* view = new ConsoleView(breakout);
