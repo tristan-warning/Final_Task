@@ -35,13 +35,17 @@ public:
 };
 
 class Block : public BrakeOutObject {
-private: 
+protected: 
     int health; // block's health
 
 public:
-    Block(double y, double x, int health);
+    Block(double y, double x, int health); // constructor that takes in initial x and y coordinates of block and its health
     int getHealth();
     void setHealth(int a);
+}
+
+class LifeBlock :  public Block // constructor that takes in initial x and y coordinates of lifeBlock and its health
+{
 }
 
 class BreakoutModel : public Observable { // BrakeOutModel class inherits from Observable class
@@ -53,16 +57,18 @@ public:
     int getPaddlePoints(); // returns points
 
     void simulate_game_step(); // simulates one step of the BreakOut game
-     void control_paddle(wchar_t); // updates paddle movement direction
+    void control_paddle(int a); // updates paddle movement direction
 
 private:
     int width = 40; // game width
     int height = 24; // game height
     int dir = 1; // ball direction
-    int paddlePoints = 0; // player score
+    int paddleLife = 0; // player's Lifes 
     bool paddleServe = false; // flag for serving
     Paddle paddle; // player object
     Ball ball; // ball object
+    Block block; // block object
+    LifeBlock lifeBlock; // block which adds Life 
 };
 
 #endif // end of header file

@@ -42,7 +42,7 @@ void ConsoleView::update() {
     }
 
     // Show points of player
-    mvprintw(1, model->getGameWidth() / 2 / 2, "%i", 0);
+    mvprintw(1, model->getGameWidth() / 2 / 2, "%i", model->getPaddleHealth());
 
     // Draw different objects. 
     drawBall(model->getBall().getY(), model->getBall().getX());
