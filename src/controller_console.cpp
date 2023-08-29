@@ -4,8 +4,21 @@ ConsoleController::ConsoleController(BreakoutModel* model) {
 	this->model = model;
 };
 
-wchar_t ConsoleController::getInput() {
+int ConsoleController::getInput() {
     wchar_t ch = getch();
-    
-    return ch;
+    if (ch == KEY_LEFT || ch == 'a' ){
+        controlKey = 1;
+    }
+    if (ch == KEY_RIGHT || ch == 'd' ){
+        controlKey = 2;
+    }
+    if (ch == ' ' ){
+        controlKey = 3;
+    }  
+    if (ch == 'p' ){
+        controlKey = 4;
+    }
+
+    model->control_paddle(controlKey);
+    return controlKey;
 };

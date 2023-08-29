@@ -36,7 +36,7 @@ void Ball::setSpeed(int a){
     speed = a;
 };
 
-Block::Block(double y, double x, int _health) : BreakOutObjects {y,x}, health(_health) {};
+Block::Block(double y, double x, int _health) : BreakOutObject {y,x}, health(_health) {};
 
 int Block::getHealth() {
     return health;
@@ -46,9 +46,29 @@ void Block::setHealth(int a){
     health = a;
 }
 
+LifeBlock :: LifeBlock(double y, double x, int_health) :  Block {y, x, health}
+{
+
+}
+
 BreakoutModel::BreakoutModel() {
 };
 
+Ball& BreakOutModel::getBall() {
+    return ball; 
+};
+    
+Block& BreakOutModel::getBlock() {
+    return block; 
+};
+
+Paddle& BreakOutModel::getPaddle() {
+    return paddle; 
+};
+
+int BreakOutModel::getPaddleLife() {
+    return paddleLife; 
+};
 
 int BreakoutModel::getGameWidth() {
     return width; 
@@ -87,7 +107,8 @@ void BreakoutModel::simulate_game_step()
         }
     }
 
-        if(ball.getY() == block.getY() - 1  || ball.getY() == block.getY()) {
+    if(ball.getY() == block.getY() - 1  || ball.getY() == block.getY()) { //////////////
+        block.setHealth(block.getHealth()-1);
         if(ball.getX() <= block.getX() + 2 && ball.getX() >= block.getX() - 2) {
             if (ball.getX() >= block.getX() - 2 && ball.getX() < block.getX())
                 dir = 5;
@@ -113,12 +134,7 @@ void BreakoutModel::simulate_game_step()
     }
 
     if(ball.getY() == 0) {
-        player2Points++;
-        player1Serve = true;
-    }
-
-    if(ball.getY() == height) {
-        paddlePoints++;
+        paddleLife--;
         paddleServe = true;
     }
 
@@ -130,24 +146,30 @@ void BreakoutModel::simulate_game_step()
     notifyUpdate();
 };
 
-void BreakOutModel::control_paddle(wchar_t ch)
+void BreakOutModel::control_paddle(int a)
 {
-    switch(ch) {
+    switch(a) {
         // left
-        case goLeft:
+        case 1:
             if(paddle.getX() != width / 2 + 4)
                 paddle.setX(paddle.getX() - 1);
             break;
         // right
-        case goRight:
+        case 2:
             if(paddle.getX() != width - 3)
                 paddle.setX(paddle.getX() + 1);
             break;
-        // spacebar
-        case ' ':
+        // start
+        case 3:
             if(paddleServe) {
                 paddleServe = false;
                 dir = 1;
+            }
+            break;
+        // enables autoplay
+        case 4:
+            if (autoplay == false){
+                autoplay = true;
             }
             break;
     }
