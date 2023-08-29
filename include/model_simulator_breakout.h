@@ -34,7 +34,7 @@ public:
     void setSpeed(int a);
 };
 
-class Block : public BrakeoutObject {
+class Block : public BrakeOutObject {
 private: 
     int health; // block's health
 
@@ -50,13 +50,19 @@ public:
 
     int getGameWidth(); // returns the game's width
     int getGameHeight(); // returns the game's height
+    int getPaddlePoints(); // returns points
 
-    void simulate_game_step(); // simulates one step of the Pong game
+    void simulate_game_step(); // simulates one step of the BreakOut game
+     void control_paddle(wchar_t); // updates paddle movement direction
 
 private:
     int width = 40; // game width
     int height = 24; // game height
     int dir = 1; // ball direction
+    int paddlePoints = 0; // player score
+    bool paddleServe = false; // flag for serving
+    Paddle paddle; // player object
+    Ball ball; // ball object
 };
 
 #endif // end of header file
