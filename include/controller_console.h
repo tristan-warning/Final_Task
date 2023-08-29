@@ -2,7 +2,7 @@
 #define CONTROLLER_BREAKOUT_H_
 
 #include "model_simulator_breakout.h" // include the Pong Model header file
-#include <ncurses.h> // include the ncurses library for console input/output
+//#include <ncurses.h> // include the ncurses library for console input/output
 
 class Controller
 {

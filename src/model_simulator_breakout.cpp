@@ -47,6 +47,7 @@ void Block::setHealth(int a){
 }
 
 BreakoutModel::BreakoutModel() {
+     : paddle(weight / 2, 2), ball(weight / 2, 3, 1)
 };
 
 
