@@ -8,7 +8,15 @@
 #include <view_console.h>
 #include "controller_console.h"
  
-//erstellen eines BreakOut test Objekts
- BreakoutModel* breakout = new BreakoutModel();
- ConsoleView* view = new ConsoleView(breakout);
- ConsoleController* controller = new ConsoleController(breakout);
+ 
+Boost_AUTO_TEST_CASE(case1)
+{
+BreakoutModel* breakout = new BreakoutModel(); 
+breakout->getBall()->setY(5)
+breakout->getBall()->
+int i = 0;
+while(i != 3) {
+    breakout->simulate_game_step();
+}
+
+}

@@ -64,7 +64,7 @@ LifeBlock ::LifeBlock(double y, double x, int_health) : Block{y, x, health}
 }
 
 BreakoutModel::BreakoutModel()
-{ : paddle(weight / 2, 2), ball(weight / 2, 3, 1)};
+{ : paddle(width / 2, 2), ball(width / 2, 3, 1)};
 
 Ball &BreakOutModel::getBall()
 {
