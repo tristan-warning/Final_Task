@@ -42,11 +42,11 @@ public:
     Block(double y, double x, int health); // constructor that takes in initial x and y coordinates of block and its health
     int getHealth();
     void setHealth(int a);
-}
+};
 
 class LifeBlock :  public Block // constructor that takes in initial x and y coordinates of lifeBlock and its health
 {
-}
+};
 
 class BreakoutModel : public Observable { // BrakeOutModel class inherits from Observable class
 public:
