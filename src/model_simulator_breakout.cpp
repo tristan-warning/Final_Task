@@ -2,93 +2,109 @@
 #include <ncurses.h>
 #include <stdlib.h>
 
-BreakOutObject::BreakOutObject(double _y, double _x) : x(_x), y(_y) {};
+BreakOutObject::BreakOutObject(double _y, double _x)
+ : x(_x), y(_y){};
 
-double BreakOutObject::getX() { 
+double BreakOutObject::getX()
+{
     return x;
 };
 
-double BreakOutObject::getY() { 
+double BreakOutObject::getY()
+{
     return y;
 };
 
-void BreakOutObject::setX(double a) {
+void BreakOutObject::setX(double a)
+{
     x = a;
 };
 
-void BreakOutObject::setY(double a) {
+void BreakOutObject::setY(double a)
+{
     y = a;
 };
 
-Paddle::Paddle(double y, double x, int _width=4) : BreakOutObject{y,x}, width(_width) {};
-    
-int Paddle::getwidth() {
+Paddle::Paddle(double y, double x, int _width = 4)
+ : BreakOutObject{y, x}, width(_width){};
+
+int Paddle::getwidth()
+{
     return width;
 };
 
-Ball::Ball(double y, double x, int _speed) : BreakOutObject {y,x}, speed(_speed) {};
+Ball::Ball(double y, double x, int _speed)
+ : BreakOutObject{y, x}, speed(_speed){};
 
-int Ball::getSpeed() { 
-    return speed; 
+int Ball::getSpeed()
+{
+    return speed;
 };
 
-void Ball::setSpeed(int a){
+void Ball::setSpeed(int a)
+{
     speed = a;
 };
 
-Block::Block(double y, double x, int _health) : BreakOutObject {y,x}, health(_health) {};
+Block::Block(double y, double x, int _health)
+ : BreakOutObject{y, x}, health(_health){};
 
-int Block::getHealth() {
+int Block::getHealth()
+{
     return health;
 }
 
-void Block::setHealth(int a){
+void Block::setHealth(int a)
+{
     health = a;
 }
 
-LifeBlock :: LifeBlock(double y, double x, int_health) :  Block {y, x, health}
+LifeBlock ::LifeBlock(double y, double x, int_health) : Block{y, x, health}
 {
-
 }
 
-BreakoutModel::BreakoutModel() {
-     : paddle(weight / 2, 2), ball(weight / 2, 3, 1)
+BreakoutModel::BreakoutModel()
+{ : paddle(weight / 2, 2), ball(weight / 2, 3, 1)};
+
+Ball &BreakOutModel::getBall()
+{
+    return ball;
 };
 
-Ball& BreakOutModel::getBall() {
-    return ball; 
-};
-    
-Block& BreakOutModel::getBlock() {
-    return block; 
+Block &BreakOutModel::getBlock()
+{
+    return block;
 };
 
-Paddle& BreakOutModel::getPaddle() {
-    return paddle; 
+Paddle &BreakOutModel::getPaddle()
+{
+    return paddle;
 };
 
-int BreakOutModel::getPaddleLife() {
-    return paddleLife; 
+int BreakOutModel::getPaddleLife()
+{
+    return paddleLife;
 };
 
-int BreakoutModel::getGameWidth() {
-    return width; 
+int BreakoutModel::getGameWidth()
+{
+    return width;
 };
-    
-int BreakoutModel::getGameHeight() {
-    return height; 
+
+int BreakoutModel::getGameHeight()
+{
+    return height;
 };
-    
 
 void BreakoutModel::simulate_game_step()
 {
     // Implement game dynamics.
-   
-     /*
+
+    /*
      * Ball directions
      *
-     * 1 - Right
-     * 2 - Left
+     * 1 - Up
+     * 2 - Down
      * 3 - Right Up
      * 4 - Right down
      * 5 - Left Up
@@ -97,51 +113,112 @@ void BreakoutModel::simulate_game_step()
      */
 
     // Ball logic
-    if(ball.getY() == paddle.getY() + 1 || ball.getY() == paddle.getY()) {
-        if(ball.getX() <= paddle.getX() + 2 && ball.getX() >= paddle.getX() - 2) {
-            if(ball.getX() >= paddle.getX() - 2 && ball.getX() < paddle.getX())
+    if (ball.getY() == paddle.getY() + 1 || ball.getY() == paddle.getY())
+    { // Der Ball trifft auf das Paddle
+        if (ball.getX() <= paddle.getX() + 2 && ball.getX() >= paddle.getX() - 2)
+        {
+            if (ball.getX() >= paddle.getX() - 2 && ball.getX() < paddle.getX())
                 dir = 3;
-            else if(ball.getX() <= paddle.getX() + 2 && ball.getX() > paddle.getX())
+            else if (ball.getX() <= paddle.getX() + 2 && ball.getX() > paddle.getX())
                 dir = 4;
             else
                 dir = 1;
         }
     }
 
-    if(ball.getY() == block.getY() - 1  || ball.getY() == block.getY()) { //////////////
-        block.setHealth(block.getHealth()-1);
-        if(ball.getX() <= block.getX() + 2 && ball.getX() >= block.getX() - 2) {
-            if (ball.getX() >= block.getX() - 2 && ball.getX() < block.getX())
-                dir = 5;
-            else if (ball.getX() <= block.getX() + 2 && ball.getX() > block.getX())
-                dir = 6;
-            else
-                dir = 2;
-        }
-    }
-
-     if(ball.getY() == height - 2) { ////////////
-        if (dir == 6)
-            dir = 5;
-        else
+    if (ball.getY() == block.getY())
+    { // Der Ball trifft auf einen Block
+        block.setHealth(block.getHealth() - 1);
+        if (dir == 1)
+            dir = 2;
+        else if (dir == 2)
+            dir = 1;
+        else if (dir == 3)
+            dir = 4;
+        else if (dir == 4)
             dir = 3;
+        else if (dir == 5)
+            dir = 6;
+        else
+            dir = 5;
     }
 
-    if(ball.getY() == 1) { ///////////////////
-        if(dir == 5)
+    if (ball.getY() == height - 1)
+    { //Der Ball trifft auf das obere Ende des Spielfeldes
+        if (dir == 1)
+            dir = 2;
+        else if (dir == 3)
+            dir = 4;
+        else
             dir = 6;
+    }
+
+    if (ball.getX() == 1)
+    { //Der Ball trifft auf den linken Spielfeldrand
+        if (dir == 5)
+            dir = 3;
         else
             dir = 4;
     }
 
-    if(ball.getY() == 0) {
+    if (ball.getX() == getGameWidth() - 1)
+    { //Der Ball trifft auf den rechten Spielfeldrand
+        if (dir == 3)
+            dir = 5;
+        else
+            dir = 6;
+    }
+
+    if (ball.getY() == 0)
+    { //Der Ball überschreitet das untere Ende des Spielfeldes
         paddleLife--;
         paddleServe = true;
     }
 
-    if(paddleServe) {
+    if (paddleServe)
+    {
         ball.setX(paddle.getY() + 1);
         ball.setY(paddle.getX());
+    }
+
+    // Ball directions
+    if (!player1Serve || !player2Serve)
+    {
+        if (dir == 1) // Up
+            ball.setX(ball.getY() + 1);
+
+        if (dir == 2) // Down
+            ball.setX(ball.getY() - 1);
+
+        if (dir == 3)
+        { // Right Up
+            ball.setX(ball.getX() + 1);
+            ball.setY(ball.getY() - 0.25);
+        }
+        if (dir == 4)
+        { // Right Down
+            ball.setX(ball.getX() + 1);
+            ball.setY(ball.getY() + 0.25);
+        }
+        if (dir == 5)
+        { // Left Up
+            ball.setX(ball.getX() - 1);
+            ball.setY(ball.getY() - 0.25);
+        }
+        if (dir == 6)
+        { // Left Down
+            ball.setX(ball.getX() - 1);
+            ball.setY(ball.getY() + 0.25);
+        }
+    }
+
+    if (ball.getY() > player1.getY())
+    {
+        player1.setY(player1.getY() + 1);
+    }
+    else
+    {
+        player1.setY(player1.getY() - 1);
     }
 
     notifyUpdate();
@@ -149,30 +226,32 @@ void BreakoutModel::simulate_game_step()
 
 void BreakOutModel::control_paddle(int a)
 {
-    switch(a) {
-        // left
-        case 1:
-            if(paddle.getX() != width / 2 + 4)
-                paddle.setX(paddle.getX() - 1);
-            break;
-        // right
-        case 2:
-            if(paddle.getX() != width - 3)
-                paddle.setX(paddle.getX() + 1);
-            break;
-        // start
-        case 3:
-            if(paddleServe) {
-                paddleServe = false;
-                dir = 1;
-            }
-            break;
-        // enables autoplay
-        case 4:
-            if (autoplay == false){
-                autoplay = true;
-            }
-            break;
+    switch (a)
+    {
+    // left
+    case 1:
+        if (paddle.getX() != width / 2 + 4)
+            paddle.setX(paddle.getX() - 1);
+        break;
+    // right
+    case 2:
+        if (paddle.getX() != width - 3)
+            paddle.setX(paddle.getX() + 1);
+        break;
+    // start
+    case 3:
+        if (paddleServe)
+        {
+            paddleServe = false;
+            dir = 1;
+        }
+        break;
+    // enables autoplay
+    case 4:
+        if (autoplay == false)
+        {
+            autoplay = true;
+        }
+        break;
     }
-
 };

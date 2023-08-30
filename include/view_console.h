@@ -2,7 +2,7 @@
 
 #include "observer.h"  // Include Observer header file
 #include "model_simulator_breakout.h"  // Include BreakOutgModel header file
-//#include <ncurses.h>
+#include <ncurses.h>
 
 class ConsoleView : public Observer  // Inheriting from Observer class
 {
