@@ -3,7 +3,7 @@
 
 #include "observer.h" // include header file for the Observable class
 
-class BrakeOutObject {
+class BreakOutObject {
 protected:
     double x, y; // BrakeOutObject's coordinates and height
 
@@ -15,7 +15,7 @@ public:
     void setY(double a);
 };
 
-class Paddle : public BrakeOutObject {
+class Paddle : public BreakOutObject {
 private:
     int width; // paddle's width
 
@@ -24,7 +24,7 @@ public:
     int getwidth();
 };
 
-class Ball : public BrakeOutObject {
+class Ball : public BreakOutObject {
 private:
     int speed; // ball's speed
     
@@ -34,7 +34,7 @@ public:
     void setSpeed(int a);
 };
 
-class Block : public BrakeOutObject {
+class Block : public BreakOutObject {
 protected: 
     int health; // block's health
 
