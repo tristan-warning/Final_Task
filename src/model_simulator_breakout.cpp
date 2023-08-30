@@ -33,8 +33,11 @@ int Paddle::getwidth()
     return width;
 };
 
-Ball::Ball(double y, double x, int _speed)
- : BreakOutObject{y, x}, speed(_speed){};
+Ball::Ball(double y, double x, int _speed) {
+setY(y);
+setX(x);
+setSpeed(speed);
+};
 
 int Ball::getSpeed()
 {
@@ -46,8 +49,11 @@ void Ball::setSpeed(int a)
     speed = a;
 };
 
-Block::Block(double y, double x, int _health)
- : BreakOutObject{y, x}, health(_health){};
+Block::Block(double y, double x, int _health) {
+ setY(y);
+ setX(x);
+ setHealth(_health);
+};
 
 int Block::getHealth()
 {
@@ -59,12 +65,15 @@ void Block::setHealth(int a)
     health = a;
 }
 
-LifeBlock ::LifeBlock(double y, double x, int_health) : Block{y, x, health}
+LifeBlock ::LifeBlock(double y, double x, int_health)
 {
-}
+setY(y);
+setX(x);
+setHealth(health);
+};
 
 BreakoutModel::BreakoutModel()
-{ : paddle(width / 2, 2), ball(width / 2, 3, 1)};
+{ : paddle(width / 2, 2), ball(width / 2, 3, 1), block};
 
 Ball &BreakoutModel::getBall()
 {
