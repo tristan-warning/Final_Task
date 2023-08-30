@@ -12,8 +12,9 @@
 Boost_AUTO_TEST_CASE(case1)
 {
 BreakoutModel* breakout = new BreakoutModel(); 
-breakout->getBall()->setY(5)
-breakout->getBall()->
+breakout->getBall()->setY(5);
+breakout->getBall()->setX()
+breakout->setDir(1)
 int i = 0;
 while(i != 3) {
     breakout->simulate_game_step();

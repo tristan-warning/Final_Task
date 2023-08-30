@@ -59,6 +59,13 @@ public:
     void simulate_game_step(); // simulates one step of the BreakOut game
     void control_paddle(int a); // updates paddle movement direction
 
+    int getDir();
+    void setDir(int _dir);
+
+    Paddle getPaddle();
+    Ball getBall();
+    Block getBlock();
+
 private:
     int width = 40; // game width
     int height = 24; // game height

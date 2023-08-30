@@ -81,6 +81,14 @@ Paddle &BreakOutModel::getPaddle()
     return paddle;
 };
 
+int BreakOutModel::getDir(){
+    return dir;
+};
+
+void BreakOutModel::setDir(int _dir){
+    dir = _dir;
+};
+
 int BreakOutModel::getPaddleLife()
 {
     return paddleLife;
@@ -222,6 +230,21 @@ void BreakoutModel::simulate_game_step()
     }
 
     notifyUpdate();
+}
+
+Paddle BreakoutModel::getPaddle()
+{
+    return Paddle();
+}
+
+Ball BreakoutModel::getBall()
+{
+    return Ball();
+}
+
+Block BreakoutModel::getBlock()
+{
+    return Block();
 };
 
 void BreakOutModel::control_paddle(int a)
