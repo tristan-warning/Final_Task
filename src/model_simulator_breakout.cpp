@@ -66,30 +66,30 @@ LifeBlock ::LifeBlock(double y, double x, int_health) : Block{y, x, health}
 BreakoutModel::BreakoutModel()
 { : paddle(width / 2, 2), ball(width / 2, 3, 1)};
 
-Ball &BreakOutModel::getBall()
+Ball &BreakoutModel::getBall()
 {
     return ball;
 };
 
-Block &BreakOutModel::getBlock()
+Block &BreakoutModel::getBlock()
 {
     return block;
 };
 
-Paddle &BreakOutModel::getPaddle()
+Paddle &BreakoutModel::getPaddle()
 {
     return paddle;
 };
 
-int BreakOutModel::getDir(){
+int BreakoutModel::getDir(){
     return dir;
 };
 
-void BreakOutModel::setDir(int _dir){
+void BreakoutModel::setDir(int _dir){
     dir = _dir;
 };
 
-int BreakOutModel::getPaddleLife()
+int BreakoutModel::getPaddleLife()
 {
     return paddleLife;
 };
@@ -232,22 +232,7 @@ void BreakoutModel::simulate_game_step()
     notifyUpdate();
 }
 
-Paddle BreakoutModel::getPaddle()
-{
-    return Paddle();
-}
-
-Ball BreakoutModel::getBall()
-{
-    return Ball();
-}
-
-Block BreakoutModel::getBlock()
-{
-    return Block();
-};
-
-void BreakOutModel::control_paddle(int a)
+void BreakoutModel::control_paddle(int a)
 {
     switch (a)
     {
