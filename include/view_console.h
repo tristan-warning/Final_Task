@@ -19,6 +19,8 @@ public:
 
     void drawBlock(double x, double y); // Function to draw the block
 
+    void drawLifeBlock(double x, double y); // Function to draw the lifeBlock
+
     void update();  // Function to update the screen
 
 private:

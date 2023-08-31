@@ -2,31 +2,31 @@
 #include <ncurses.h>
 #include <stdlib.h>
 
-BreakOutObject::BreakOutObject(double _y, double _x) : x(_x), y(_y) {};
+BreakoutObject::BreakoutObject(double _y, double _x) : x(_x), y(_y) {};
 
-double BreakOutObject::getX() { 
+double BreakoutObject::getX() { 
     return x;
 };
 
-double BreakOutObject::getY() { 
+double BreakoutObject::getY() { 
     return y;
 };
 
-void BreakOutObject::setX(double a) {
+void BreakoutObject::setX(double a) {
     x = a;
 };
 
-void BreakOutObject::setY(double a) {
+void BreakoutObject::setY(double a) {
     y = a;
 };
 
-Paddle::Paddle(double y, double x, int _width=4) : BreakOutObject{y,x}, width(_width) {};
+Paddle::Paddle(double y, double x, int _width=4) : BreakoutObject{y,x}, width(_width) {};
     
 int Paddle::getwidth() {
     return width;
 };
 
-Ball::Ball(double y, double x, int _speed) : BreakOutObject {y,x}, speed(_speed) {};
+Ball::Ball(double y, double x, int _speed) : BreakoutObject {y,x}, speed(_speed) {};
 
 int Ball::getSpeed() { 
     return speed; 
@@ -36,7 +36,7 @@ void Ball::setSpeed(int a){
     speed = a;
 };
 
-Block::Block(double y, double x, int _health) : BreakOutObject {y,x}, health(_health) {};
+Block::Block(double y, double x, int _health) : BreakoutObject {y,x}, health(_health) {};
 
 int Block::getHealth() {
     return health;
@@ -51,22 +51,58 @@ LifeBlock :: LifeBlock(double y, double x, int_health) :  Block {y, x, health}
 
 }
 
-BreakoutModel::BreakoutModel() {
+BreakoutModel::BreakoutModel() : paddle(2, width / 2), ball(3, width / 2, 1), block1(7 , 20, 1), block2(8, 20, 1), block3(10, 20, 1), block4(11, 20, 1), block5(12, 20, 1), block6(13, 20, 1), block7(15, 20, 1), block8(16, 20, 1), lifeBlock1(9, 20, 2), lifeBlock2(14, 20, 2) {
 };
 
-Ball& BreakOutModel::getBall() {
+Ball& BreakoutModel::getBall() {
     return ball; 
 };
     
-Block& BreakOutModel::getBlock() {
-    return block; 
+Block& BreakoutModel::getBlock1() {
+    return block1; 
 };
 
-Paddle& BreakOutModel::getPaddle() {
+Block& BreakoutModel::getBlock2() {
+    return block2; 
+};
+
+Block& BreakoutModel::getBlock3() {
+    return block3; 
+};
+
+Block& BreakoutModel::getBlock4() {
+    return block4; 
+};
+
+Block& BreakoutModel::getBlock5() {
+    return block5; 
+};
+
+Block& BreakoutModel::getBlock6() {
+    return block6; 
+};
+
+Block& BreakoutModel::getBlock7() {
+    return block7; 
+};
+
+Block& BreakoutModel::getBlock8() {
+    return block8; 
+};
+
+LifeBlock& BreakoutModel::getLifeBlock1() {
+    return lifeBlock1; 
+};
+
+LifeBlock& BreakoutModel::getLifeBlock2() {
+    return lifeBlock2; 
+};
+
+Paddle& BreakoutModel::getPaddle() {
     return paddle; 
 };
 
-int BreakOutModel::getPaddleLife() {
+int BreakoutModel::getPaddleLife() {
     return paddleLife; 
 };
 
@@ -146,7 +182,7 @@ void BreakoutModel::simulate_game_step()
     notifyUpdate();
 };
 
-void BreakOutModel::control_paddle(int a)
+void BreakoutModel::control_paddle(int a)
 {
     switch(a) {
         // left

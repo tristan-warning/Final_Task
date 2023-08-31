@@ -3,19 +3,19 @@
 
 #include "observer.h" // include header file for the Observable class
 
-class BrakeOutObject {
+class BreakeoutObject {
 protected:
-    double x, y; // BrakeOutObject's coordinates and height
+    double x, y; // BreakeOutObject's coordinates and height
 
 public:
-    BreakOutObject(double y, double x); // constructor that takes in initial x and y coordinates of player
+    BreakoutObject(double y, double x); // constructor that takes in initial x and y coordinates of player
     double getX();
     double getY();
     void setX(double a);
     void setY(double a);
 };
 
-class Paddle : public BrakeOutObject {
+class Paddle : public BreakeoutObject {
 private:
     int width; // paddle's width
 
@@ -24,7 +24,7 @@ public:
     int getwidth();
 };
 
-class Ball : public BrakeOutObject {
+class Ball : public BreakeoutObject {
 private:
     int speed; // ball's speed
     
@@ -34,7 +34,7 @@ public:
     void setSpeed(int a);
 };
 
-class Block : public BrakeOutObject {
+class Block : public BreakeoutObject {
 protected: 
     int health; // block's health
 
@@ -64,11 +64,11 @@ private:
     int height = 24; // game height
     int dir = 1; // ball direction
     int paddleLife = 0; // player's Lifes 
-    bool paddleServe = false; // flag for serving
+    bool paddleServe = false; // flag for servinsg
     Paddle paddle; // player object
     Ball ball; // ball object
-    Block block; // block object
-    LifeBlock lifeBlock; // block which adds Life 
+    Block block1, block2, block3, block4, block5, block6, block7, block8; // block objects
+    LifeBlock lifeBlock1, lifeBlock2; // Lifeblock objects
 };
 
 #endif // end of header file
